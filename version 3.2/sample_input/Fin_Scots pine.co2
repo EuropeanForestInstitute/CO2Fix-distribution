@@ -1,0 +1,348 @@
+CO2Fix_3_1
+
+450	# simulation lenght [yr]
+
+comments
+{
+Managed Scots pine stand in Finland. Rotation length 90 years.
+
+Scots pine stand in southern Finland, Vaccinium site type
+Rotation length 90 years
+
+References:
+
+Koivisto, P. 1959. Growth and yield tables. Communications Instituti Forestalis Fenniae. 51: 1-44. Finnish Forest Research Insitute. Helsinki, Finland. (compilation of Norway spruce, Scots pine, white birch, and common birch treated in different ways )
+
+Marklund, L. G. 1988. Biomassafunktioner för tall, gran och björk I Sverige, Sveriges lantbruksuniversitetet, Rappoter-Skog 45, 1-73.
+}
+
+1	# number of Scenarios
+
+0	# mitigation scenario
+0	# baseline scenario
+
+0	# Project duration
+0	 #Year of first verification
+
+0	# Base year (or start of crediting period)
+
+0	# NetNet year, year in which base emissions or removals are measured
+
+1	# No Baseline
+0	# Exclude products
+0	# Exclude bioenergy
+1	# Mitigation method (i.e. JI, CDM etc....)
+1	# Assist 1 result
+0	# Assist 2 result
+7	# Carbon selected for comparison between baseline and mitigation scenario (i.e. biomass, soil, total etc..)
+-1	# answer0
+-1	# answer1
+-1	# answer2
+-1	# answer3
+-1	# answer4
+-1	# answer5
+-1	# answer6
+-1	# answer7
+-1	# answer8
+-1	# answer9
+-1	# answer10
+-1	# answer11
+-1	# answer12
+-1	# answer13
+-1	# answer14
+-1	# answer15
+-1	# answer16
+#Growth season (0,1) and Mean monthly temperature (C)
+0	0	#January
+0	0	#February
+0	0	#March
+0	0	#April
+0	0	#May
+0	0	#June
+0	0	#July
+0	0	#August
+0	0	#September
+0	0	#October
+0	0	#November
+0	0	#December
+scenario "Scenario 1"
+{
+	description
+	{
+Scenario number 1
+}
+	stand
+	{
+		1	# number of cohorts
+
+		# global biomass parameters
+		700	# max_biomass in the stand [Mg/ha]
+		"a"	# growth method: "d"=growth driven by biomass density
+			#                "a"=growth driven by age
+		"t"	# competition method: "t"=competition relative to the Total biomass in the stand
+			#                     "m"=competition against multiple cohorts
+
+		"t"	# management mortality method: "t"=management mortality depends only in the total volume harvested
+			#                              "m"=management mortality depends on which cohort is harvested
+
+		# global soil parameters
+		2152.511	# annual mean temperature
+		262.9	# precipitation dry season
+		355.8	# potential evapotranspiration dry season
+
+		cohort "Scots pine"
+		{
+			0	# starting age for this cohort
+			biomass
+			{
+				0.0	# max_biomass in this cohort [Mg/ha]
+
+				# stems
+				0.5	# carbon content
+				0.490	# wood density
+				0	# initial carbon
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	0.2
+					20	7.313829787
+					25	7.722007722
+					30	8.531994981
+					35	9.225092251
+					40	9.443099274
+					45	9.330143541
+					50	9.241706161
+					55	8.941176471
+					60	8.421052632
+					65	7.683352736
+					70	6.960556845
+					75	6.25
+					80	5.658198614
+					85	5.184331797
+					90	4.942528736
+					95	4.707233065
+					100	4.587155963
+					105	4.467353952
+					110	4.347826087
+				}
+
+				# foliage
+				0.5	# carbon content
+				0	# initial carbon
+				1	# growth correction factor
+				0.25	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1
+					25	0.194
+					30	0.414
+					35	0.410
+					40	0.401
+					45	0.371
+					50	0.377
+					55	0.396
+					60	0.439
+					65	0.423
+					70	0.476
+					75	0.577
+					80	0.641
+					85	0.706
+					90	0.885
+					95	1.145
+					100	0.881
+					105	1.016
+					110	0.979
+				}
+
+				# branches
+				0.5	# carbon content
+				0	# initial carbon
+				1	# growth correction factor
+				0.027	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1
+					25	0.279
+					30	0.253
+					35	0.225
+					40	0.217
+					45	0.193
+					50	0.186
+					55	0.169
+					60	0.167
+					65	0.169
+					70	0.169
+					75	0.191
+					80	0.207
+					85	0.221
+					90	0.260
+					95	0.299
+					100	0.272
+					105	0.299
+					110	0.317
+				}
+
+				# roots
+				0.5	# carbon content
+				0	# initial carbon
+				1	# growth correction factor
+				0.027	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1
+					25	0.249
+					30	0.253
+					35	0.238
+					40	0.242
+					45	0.226
+					50	0.227
+					55	0.216
+					60	0.220
+					65	0.231
+					70	0.237
+					75	0.273
+					80	0.298
+					85	0.326
+					90	0.382
+					95	0.445
+					100	0.402
+					105	0.444
+					110	0.465
+				}
+
+				# mortality table
+				{
+					#biom/biom_max	mortality
+				}
+
+				# competition table
+				{
+					#biom/biom_max	growth modifier
+				}
+
+				# thinning and harvest table
+				{
+					#		stems		branches		foliage		slash
+					#yr	%thin	logw	pulp	logw	pulp	logw	pulp	firew
+					35	0.35	0	0.85	0	0	0.0	0.0	0	0
+					50	0.3	0	0.85	0	0	0.0	0.0	0	0
+					75	0.25	0.3	0.6	0	0	0.0	0.0	0	0
+					90	1	0.6	0.3	0	0	0.0	0.0	0	0
+				}
+
+				# management mortality
+				{
+					#intensity	start	yrs
+				}
+			}
+
+			soil
+			{
+				0.6	# c
+				0.5	# k0_sol
+				0.27	# c_nwl_sol
+				0.51	# c_nwl_cel
+				0.03	# c_fwl_sol
+				0.65	# c_fwl_cel
+				0.03	# c_cwl_sol
+				0.69	# c_cwl_cel
+				1.091490	# X0_nwl
+				1.475748	# X0_fwl
+				4.489380	# X0_cwl
+				0.754806	# X0_sol
+				4.309472	# X0_cel
+				5.556649	# X0_lig
+				13.593038	# X0_hum1
+				27.424971	# X0_hum2
+			}
+			finance
+			{
+				0.0	# stumpage of fire wood
+				25.13	# stumpage of pulp wood
+				48.32	# stumpage of round wood
+			}
+				 # age related costs
+				 #yr	fixed cost	recurring cost
+				{
+					1	144.14	0.00
+					1	734.83	0.00
+					7	221.12	0.00
+					15	221.12	0.00
+				}
+				 # age related returns
+				 #yr	fixed return	recurring return
+				{
+				}
+		}
+
+	}
+
+	products
+	{
+		# raw material allocation
+		0.68	0	0.32	# logwood to production line: sawnwood, boards, paper, rest=energy wood
+			0	1	# pulpwood to production line: boards, paper, rest=energy wood
+
+		# process losses
+		0.16	0.20	0.15	0	# from sawnwood to: boards, paper, firewood, mill site dump
+			0.30	0.19	0	# from boards to: paper, firewood, mill site dump
+				0.40	0	# from paper to: firewood, mill site dump
+					0	# from firewood to: mill site dump
+
+		# products allocation
+		0.35	0.45	# sawnwood to: long term, medium term, rest=short term
+		0.2	0.5	# boards to: long term, medium term, rest=short term
+		0	0	# paper to: long term, medium term, rest=short term
+
+		# products end of life
+		0.3	0.35	# long term to: recycling, energy, rest=landfill
+		0.25	0.25	# med term to: recycling, energy, rest=landfill
+		0.7	0.15	# short term to: recycling, energy, rest=landfill
+
+		# recycling table
+		0	0.5	# long to: long, med, rest=short
+			0	# med to: med, rest=short
+				# all=short to short
+
+		# life span
+		50	15	1	10	100	# long, med, short, mill site dump, landfill
+	}
+
+	bioenergy
+	{
+		# GWP of gases
+		1	23	270	2	12	# GWP of gases: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for current technology using slashwood fuelwood
+		"None"	"None"	# Name of current fuel and technology using slashwood fuelwood
+		100	50	# Technology efficiency and heating value
+		0	0	0	0	0	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for alternative technology using slashwood fuelwood
+		"Combustion plant<50MW (Boilers)"	# Name of alternative technology using slashwood fuelwood
+		24	15	# Technology efficiency and heating value
+		0	0.4800	0.0600	3.6000	0.7200	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for current technology using industrial residues fuelwood
+		"Coal"	"Power Plant"	# Name of current fuel and technology using industrial fuelwood
+		33	28	# Technology efficiency and heating value
+		2425.1500	0.0186	0.0426	0.2399	0.0000	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for alternative technology using industrial residues fuelwood
+		"Combustion plant>=50 and <300MW (Boilers)"	# Name of alternative technology using industrial fuelwood
+		24	15	# Technology efficiency and heating value
+		0	0.4800	0.0600	3.6000	0.7200	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+	}
+
+	# user defined cost table
+	{
+		#yr	fixed costs	recurring costs	fixed returns	recurring returns	interest rate
+		0	0	0.00	0	0.00	0.0000
+	}
+
+}
+
