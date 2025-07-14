@@ -1,0 +1,463 @@
+CO2Fix_3_1
+
+100	# simulation lenght [yr]
+
+comments
+{
+Example how to simulate grassland. 
+Mart-Jan Schelhaas
+July 2004
+
+This grassland has an NPP of 9 Mg dry matter per hectare per year, of which 5 Mg abovegroudn and 4 Mg belowground. Grass is simulated as a "tree" with a very small stem and a lot of foliage and roots. Increment in the stem is very small, and mortality high to avoid a build up in the stem biomass. Allocation to roots and foliage is then relatively high to get the required NPP rates.
+
+The file contains two scenarios, one with an unmanaged grassland and one with a managed grassland. In the managed scenario, 60% of the biomass is harvested. Since this applies only to the stem compartment, the SlashFirewood box needs to be set at 1, to indicate that all the slash (=foliage) is removed from the site.
+}
+
+2	# number of Scenarios
+
+0	# mitigation scenario
+0	# baseline scenario
+
+0	# Project duration
+0	 #Year of first verification
+
+0	# Base year (or start of crediting period)
+
+0	# NetNet year, year in which base emissions or removals are measured
+
+1	# No Baseline
+1	# Exclude products
+1	# Exclude bioenergy
+0	# Mitigation method (i.e. JI, CDM etc....)
+1	# Assist 1 result
+0	# Assist 2 result
+7	# Carbon selected for comparison between baseline and mitigation scenario (i.e. biomass, soil, total etc..)
+-1	# answer0
+-1	# answer1
+-1	# answer2
+-1	# answer3
+-1	# answer4
+-1	# answer5
+-1	# answer6
+-1	# answer7
+-1	# answer8
+-1	# answer9
+-1	# answer10
+-1	# answer11
+-1	# answer12
+-1	# answer13
+-1	# answer14
+-1	# answer15
+-1	# answer16
+#Growth season (0,1) and Mean monthly temperature (C)
+0	0	#January
+0	0	#February
+0	0	#March
+0	0	#April
+0	0	#May
+0	0	#June
+0	0	#July
+0	0	#August
+0	0	#September
+0	0	#October
+0	0	#November
+0	0	#December
+scenario "grass unmanaged"
+{
+	description
+	{
+unmanaged grassland
+}
+	stand
+	{
+		1	# number of cohorts
+
+		# global biomass parameters
+		0	# max_biomass in the stand [Mg/ha]
+		"a"	# growth method: "d"=growth driven by biomass density
+			#                "a"=growth driven by age
+		"t"	# competition method: "t"=competition relative to the Total biomass in the stand
+			#                     "m"=competition against multiple cohorts
+
+		"t"	# management mortality method: "t"=management mortality depends only in the total volume harvested
+			#                              "m"=management mortality depends on which cohort is harvested
+
+		# global soil parameters
+		3439	# annual mean temperature
+		460	# precipitation dry season
+		468	# potential evapotranspiration dry season
+
+		cohort "grass"
+		{
+			0	# starting age for this cohort
+			biomass
+			{
+				0.0	# max_biomass in this cohort [Mg/ha]
+
+				# stems
+				.47	# carbon content
+				1	# wood density
+				0.01	# initial carbon
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	0.01
+				}
+
+				# foliage
+				.47	# carbon content
+				1.38	# initial carbon
+				1	# growth correction factor
+				0.8	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	500
+				}
+
+				# branches
+				0.47	# carbon content
+				0	# initial carbon
+				1	# growth correction factor
+				0	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+				}
+
+				# roots
+				.47	# carbon content
+				1.04	# initial carbon
+				1	# growth correction factor
+				0.9	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	400
+				}
+
+				# mortality table
+				{
+					#biom/biom_max	mortality
+					0	0.9
+				}
+
+				# competition table
+				{
+					#biom/biom_max	growth modifier
+				}
+
+				# thinning and harvest table
+				{
+					#		stems		branches		foliage		slash
+					#yr	%thin	logw	pulp	logw	pulp	logw	pulp	firew
+				}
+
+				# management mortality
+				{
+					#intensity	start	yrs
+				}
+			}
+
+			soil
+			{
+				0.6	# c
+				0.8	# k0_sol
+				0.38	# c_nwl_sol
+				0.36	# c_nwl_cel
+				0.03	# c_fwl_sol
+				0.65	# c_fwl_cel
+				0.03	# c_cwl_sol
+				0.75	# c_cwl_cel
+				4.230000	# X0_nwl
+				0.000000	# X0_fwl
+				0.000000	# X0_cwl
+				1.607400	# X0_sol
+				3.034359	# X0_cel
+				6.254151	# X0_lig
+				19.564855	# X0_hum1
+				46.427164	# X0_hum2
+			}
+			finance
+			{
+				0.0	# stumpage of fire wood
+				0.0	# stumpage of pulp wood
+				0.0	# stumpage of round wood
+			}
+				 # age related costs
+				 #yr	fixed cost	recurring cost
+				{
+				}
+				 # age related returns
+				 #yr	fixed return	recurring return
+				{
+				}
+		}
+
+	}
+
+	products
+	{
+		# raw material allocation
+		1	0	0	# logwood to production line: sawnwood, boards, paper, rest=energy wood
+			0	1	# pulpwood to production line: boards, paper, rest=energy wood
+
+		# process losses
+		0	0	0	0	# from sawnwood to: boards, paper, firewood, mill site dump
+			0	0	0	# from boards to: paper, firewood, mill site dump
+				0	0	# from paper to: firewood, mill site dump
+					0	# from firewood to: mill site dump
+
+		# products allocation
+		1	0	# sawnwood to: long term, medium term, rest=short term
+		0	1	# boards to: long term, medium term, rest=short term
+		0	0	# paper to: long term, medium term, rest=short term
+
+		# products end of life
+		0	0	# long term to: recycling, energy, rest=landfill
+		0	0	# med term to: recycling, energy, rest=landfill
+		0	0	# short term to: recycling, energy, rest=landfill
+
+		# recycling table
+		0	0	# long to: long, med, rest=short
+			0	# med to: med, rest=short
+				# all=short to short
+
+		# life span
+		0	0	0	0	0	# long, med, short, mill site dump, landfill
+	}
+
+	bioenergy
+	{
+		# GWP of gases
+		1	23	270	2	12	# GWP of gases: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for current technology using slashwood fuelwood
+		"Coal"	"Cookstove"	# Name of current fuel and technology using slashwood fuelwood
+		24	15	# Technology efficiency and heating value
+		2550	0.02	0	66.2	0.02	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for alternative technology using slashwood fuelwood
+		"Improved Cookstove"	# Name of alternative technology using slashwood fuelwood
+		25	15	# Technology efficiency and heating value
+		1550	7.92	0	69.5	6.84	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for current technology using industrial residues fuelwood
+		"Coal"	"Cookstove"	# Name of current fuel and technology using industrial fuelwood
+		24	15	# Technology efficiency and heating value
+		2550	0.02	0	66.2	0.02	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for alternative technology using industrial residues fuelwood
+		"Improved Cookstove"	# Name of alternative technology using industrial fuelwood
+		25	15	# Technology efficiency and heating value
+		1550	7.92	0	69.5	6.84	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+	}
+
+	# user defined cost table
+	{
+		#yr	fixed costs	recurring costs	fixed returns	recurring returns	interest rate
+	}
+
+}
+
+scenario "grass managed"
+{
+	description
+	{
+managed grassland
+}
+	stand
+	{
+		1	# number of cohorts
+
+		# global biomass parameters
+		0	# max_biomass in the stand [Mg/ha]
+		"a"	# growth method: "d"=growth driven by biomass density
+			#                "a"=growth driven by age
+		"t"	# competition method: "t"=competition relative to the Total biomass in the stand
+			#                     "m"=competition against multiple cohorts
+
+		"t"	# management mortality method: "t"=management mortality depends only in the total volume harvested
+			#                              "m"=management mortality depends on which cohort is harvested
+
+		# global soil parameters
+		3439	# annual mean temperature
+		460	# precipitation dry season
+		468	# potential evapotranspiration dry season
+
+		cohort "grass"
+		{
+			0	# starting age for this cohort
+			biomass
+			{
+				0.0	# max_biomass in this cohort [Mg/ha]
+
+				# stems
+				.47	# carbon content
+				1	# wood density
+				0.01	# initial carbon
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	0.01
+				}
+
+				# foliage
+				.47	# carbon content
+				1.38	# initial carbon
+				1	# growth correction factor
+				0.8	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	500
+				}
+
+				# branches
+				0.47	# carbon content
+				0	# initial carbon
+				1	# growth correction factor
+				0	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+				}
+
+				# roots
+				.47	# carbon content
+				1.04	# initial carbon
+				1	# growth correction factor
+				0.9	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	400
+				}
+
+				# mortality table
+				{
+					#biom/biom_max	mortality
+					0	0.9
+				}
+
+				# competition table
+				{
+					#biom/biom_max	growth modifier
+				}
+
+				# thinning and harvest table
+				{
+					#		stems		branches		foliage		slash
+					#yr	%thin	logw	pulp	logw	pulp	logw	pulp	firew
+					1	0.6	0	0	0	0	0.0	0.0	1	0
+				}
+
+				# management mortality
+				{
+					#intensity	start	yrs
+				}
+			}
+
+			soil
+			{
+				0.6	# c
+				0.8	# k0_sol
+				0.38	# c_nwl_sol
+				0.36	# c_nwl_cel
+				0.03	# c_fwl_sol
+				0.65	# c_fwl_cel
+				0.03	# c_cwl_sol
+				0.75	# c_cwl_cel
+				4.230000	# X0_nwl
+				0.000000	# X0_fwl
+				0.0	# X0_cwl
+				1.607400	# X0_sol
+				3.034359	# X0_cel
+				6.254151	# X0_lig
+				19.564855	# X0_hum1
+				46.427164	# X0_hum2
+			}
+			finance
+			{
+				0.0	# stumpage of fire wood
+				0.0	# stumpage of pulp wood
+				0.0	# stumpage of round wood
+			}
+				 # age related costs
+				 #yr	fixed cost	recurring cost
+				{
+				}
+				 # age related returns
+				 #yr	fixed return	recurring return
+				{
+				}
+		}
+
+	}
+
+	products
+	{
+		# raw material allocation
+		1	0	0	# logwood to production line: sawnwood, boards, paper, rest=energy wood
+			0	1	# pulpwood to production line: boards, paper, rest=energy wood
+
+		# process losses
+		0	0	0	0	# from sawnwood to: boards, paper, firewood, mill site dump
+			0	0	0	# from boards to: paper, firewood, mill site dump
+				0	0	# from paper to: firewood, mill site dump
+					0	# from firewood to: mill site dump
+
+		# products allocation
+		1	0	# sawnwood to: long term, medium term, rest=short term
+		0	1	# boards to: long term, medium term, rest=short term
+		0	0	# paper to: long term, medium term, rest=short term
+
+		# products end of life
+		0	0	# long term to: recycling, energy, rest=landfill
+		0	0	# med term to: recycling, energy, rest=landfill
+		0	0	# short term to: recycling, energy, rest=landfill
+
+		# recycling table
+		0	0	# long to: long, med, rest=short
+			0	# med to: med, rest=short
+				# all=short to short
+
+		# life span
+		0	0	0	0	0	# long, med, short, mill site dump, landfill
+	}
+
+	bioenergy
+	{
+		# GWP of gases
+		1	23	270	2	12	# GWP of gases: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for current technology using slashwood fuelwood
+		"Coal"	"Cookstove"	# Name of current fuel and technology using slashwood fuelwood
+		24	15	# Technology efficiency and heating value
+		2550	0.02	0	66.2	0.02	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for alternative technology using slashwood fuelwood
+		"Improved Cookstove"	# Name of alternative technology using slashwood fuelwood
+		25	15	# Technology efficiency and heating value
+		1550	7.92	0	69.5	6.84	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for current technology using industrial residues fuelwood
+		"Coal"	"Cookstove"	# Name of current fuel and technology using industrial fuelwood
+		24	15	# Technology efficiency and heating value
+		2550	0.02	0	66.2	0.02	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for alternative technology using industrial residues fuelwood
+		"Improved Cookstove"	# Name of alternative technology using industrial fuelwood
+		25	15	# Technology efficiency and heating value
+		1550	7.92	0	69.5	6.84	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+	}
+
+	# user defined cost table
+	{
+		#yr	fixed costs	recurring costs	fixed returns	recurring returns	interest rate
+	}
+
+}
+

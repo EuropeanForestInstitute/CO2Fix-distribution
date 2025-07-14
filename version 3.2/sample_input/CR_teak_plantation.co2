@@ -1,0 +1,315 @@
+CO2Fix_3_1
+
+120	# simulation lenght [yr]
+
+comments
+{
+Teak (Tectona grandis ) plantation in the tropics (data from Costa Rica)
+MAI 15 m3/ha/yr over 40 years
+Rotation 40 years; thinnings at ages 3, 10, 20, and 30 years.
+
+CASFOR Case Study by Markku Kanninen and Álvaro Vallejo, CATIE, 2004.
+
+Growth data from:
+Pérez Cordero, L.D.; Ugalde Arias, L.; Kanninen, M.  
+Desarrollo de escenarios de crecimiento para plantaciones de teca (Tectona grandis) en Costa Rica.  
+Revista Forestal Centroamericana (CATIE). (Jul-Set 2000). (no.31) p. 16-22.  
+
+Volume data from:
+Pérez Cordero, Luis Diego; Kanninen, Markku. 2003. Provisional equations for estimating total and merchantable volume of Tectona Grandis trees in Costa Rica. Forests, Trees and Livelihoods, 2003. Vol. 13, pp. 345-359.
+
+Financial data from:
+Puolakka, Pekka, 2003. Profitability of teak in Costa Rica. MSc Thesis, University of Helsinki. 78 pp.
+
+}
+
+1	# number of Scenarios
+
+0	# mitigation scenario
+0	# baseline scenario
+
+0	# Project duration
+0	 #Year of first verification
+
+0	# Base year (or start of crediting period)
+
+0	# NetNet year, year in which base emissions or removals are measured
+
+1	# No Baseline
+0	# Exclude products
+1	# Exclude bioenergy
+0	# Mitigation method (i.e. JI, CDM etc....)
+1	# Assist 1 result
+0	# Assist 2 result
+7	# Carbon selected for comparison between baseline and mitigation scenario (i.e. biomass, soil, total etc..)
+-1	# answer0
+-1	# answer1
+-1	# answer2
+-1	# answer3
+-1	# answer4
+-1	# answer5
+-1	# answer6
+-1	# answer7
+-1	# answer8
+-1	# answer9
+-1	# answer10
+-1	# answer11
+-1	# answer12
+-1	# answer13
+-1	# answer14
+-1	# answer15
+-1	# answer16
+#Growth season (0,1) and Mean monthly temperature (C)
+0	0	#January
+0	0	#February
+0	0	#March
+0	0	#April
+0	0	#May
+0	0	#June
+0	0	#July
+0	0	#August
+0	0	#September
+0	0	#October
+0	0	#November
+0	0	#December
+scenario "Scenario 1"
+{
+	description
+	{
+Teak plantation
+}
+	stand
+	{
+		1	# number of cohorts
+
+		# global biomass parameters
+		400.0	# max_biomass in the stand [Mg/ha]
+		"a"	# growth method: "d"=growth driven by biomass density
+			#                "a"=growth driven by age
+		"t"	# competition method: "t"=competition relative to the Total biomass in the stand
+			#                     "m"=competition against multiple cohorts
+
+		"t"	# management mortality method: "t"=management mortality depends only in the total volume harvested
+			#                              "m"=management mortality depends on which cohort is harvested
+
+		# global soil parameters
+		8000	# annual mean temperature
+		1500	# precipitation dry season
+		1000	# potential evapotranspiration dry season
+
+		cohort "Teak"
+		{
+			0	# starting age for this cohort
+			biomass
+			{
+				20000.0	# max_biomass in this cohort [Mg/ha]
+
+				# stems
+				0.48	# carbon content
+				0.50	# wood density
+				0.0	# initial carbon
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	0.00
+					3	25.00
+					6	35.00
+					8	40.00
+					12	40.0
+					25	27.00
+					30	22.00
+					50	5.00
+					60	0.01
+				}
+
+				# foliage
+				0.48	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				1	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	0.6
+					10	0.4
+					20	1.0
+					30	1.5
+					40	1.5
+				}
+
+				# branches
+				0.48	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				0.05	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	0.3
+					10	0.4
+					20	0.5
+					30	1.00
+				}
+
+				# roots
+				0.48	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				0.05	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	0.4
+					10	0.4
+					30	0.9
+					50	1.0
+				}
+
+				# mortality table
+				{
+					#biom/biom_max	mortality
+					0	0.01
+					25	0.01
+					100	0.01
+					200	1.00
+				}
+
+				# competition table
+				{
+					#biom/biom_max	growth modifier
+					0.0	1.0
+					0.5	1.0
+					0.75	0.8
+					1.0	0.1
+				}
+
+				# thinning and harvest table
+				{
+					#		stems		branches		foliage		slash
+					#yr	%thin	logw	pulp	logw	pulp	logw	pulp	firew
+					3	0.5	0.7	0.00	0.00	0.00	0.0	0.0	0.00	35
+					10	0.6	0.7	0.00	0.00	0.00	0.0	0.0	0.00	27
+					20	0.5	0.7	0.00	0.00	0.00	0.0	0.0	0.00	24
+					30	0.25	0.7	0.00	0.00	0.00	0.0	0.0	0.00	20
+					40	1.0	0.7	0.00	0.00	0.00	0.0	0.0	0.00	17
+				}
+
+				# management mortality
+				{
+					#intensity	start	yrs
+				}
+			}
+
+			soil
+			{
+				0.6	# c
+				0.8	# k0_sol
+				0.38	# c_nwl_sol
+				0.36	# c_nwl_cel
+				0.03	# c_fwl_sol
+				0.65	# c_fwl_cel
+				0.03	# c_cwl_sol
+				0.75	# c_cwl_cel
+				0.360000	# X0_nwl
+				0.121650	# X0_fwl
+				0.506876	# X0_cwl
+				0.046569	# X0_sol
+				0.304632	# X0_cel
+				0.453721	# X0_lig
+				1.698119	# X0_hum1
+				4.789617	# X0_hum2
+			}
+			finance
+			{
+				0.0	# stumpage of fire wood
+				50	# stumpage of pulp wood
+				150	# stumpage of round wood
+			}
+				 # age related costs
+				 #yr	fixed cost	recurring cost
+				{
+					1	470	5.00
+					3	56.3	5.00
+					4	92.6	5.00
+					5	53.1	5.00
+					6	51.9	5.00
+					120	0	5.00
+				}
+				 # age related returns
+				 #yr	fixed return	recurring return
+				{
+				}
+		}
+
+	}
+
+	products
+	{
+		# raw material allocation
+		.7	0.15	0.00	# logwood to production line: sawnwood, boards, paper, rest=energy wood
+			0.00	0.80	# pulpwood to production line: boards, paper, rest=energy wood
+
+		# process losses
+		0.10	0.00	0.35	0.2	# from sawnwood to: boards, paper, firewood, mill site dump
+			0.05	0.20	0.2	# from boards to: paper, firewood, mill site dump
+				0.20	0.2	# from paper to: firewood, mill site dump
+					0.05	# from firewood to: mill site dump
+
+		# products allocation
+		0.10	0.40	# sawnwood to: long term, medium term, rest=short term
+		0.10	0.30	# boards to: long term, medium term, rest=short term
+		0.00	0.04	# paper to: long term, medium term, rest=short term
+
+		# products end of life
+		0.02	0.3	# long term to: recycling, energy, rest=landfill
+		0.04	.3	# med term to: recycling, energy, rest=landfill
+		0.15	.4	# short term to: recycling, energy, rest=landfill
+
+		# recycling table
+		0.00	0.2	# long to: long, med, rest=short
+			.1	# med to: med, rest=short
+				# all=short to short
+
+		# life span
+		20	10	1	10	145	# long, med, short, mill site dump, landfill
+	}
+
+	bioenergy
+	{
+		# GWP of gases
+		1	23	270	2	12	# GWP of gases: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for current technology using slashwood fuelwood
+		"Coal"	"Cookstove"	# Name of current fuel and technology using slashwood fuelwood
+		24	15	# Technology efficiency and heating value
+		2550	0.02	0	66.2	0.02	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for alternative technology using slashwood fuelwood
+		"Improved Cookstove"	# Name of alternative technology using slashwood fuelwood
+		25	15	# Technology efficiency and heating value
+		1550	7.92	0	69.5	6.84	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for current technology using industrial residues fuelwood
+		"Coal"	"Cookstove"	# Name of current fuel and technology using industrial fuelwood
+		24	15	# Technology efficiency and heating value
+		2550	0.02	0	66.2	0.02	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for alternative technology using industrial residues fuelwood
+		"Improved Cookstove"	# Name of alternative technology using industrial fuelwood
+		25	15	# Technology efficiency and heating value
+		1550	7.92	0	69.5	6.84	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+	}
+
+	# user defined cost table
+	{
+		#yr	fixed costs	recurring costs	fixed returns	recurring returns	interest rate
+		1	0	56.00	0	0.00	0.0700
+		2	0	69.00	0	0.00	0.0700
+		3	0	96.00	0	0.00	0.0700
+		4	0	46.00	0	0.00	0.0700
+		5	0	7.00	0	0.00	0.0700
+	}
+
+}
+
