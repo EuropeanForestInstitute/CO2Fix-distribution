@@ -1,0 +1,571 @@
+CO2Fix_3_1
+
+100	# simulation lenght [yr]
+
+comments
+{
+Coffee-agroforestry plantation in the tropics (data from Costa Rica)
+The Biomass Model has three cohorts:
+  1) Canopy layer (shade tree): Cordia alliodora (100 trees per ha)
+      - rotation 20 years,  MAI 7 m3/ha/yr over 20 yr. rotation period
+  2) Intermediate layer (service tree): Erythrina poeppigiana
+      - leaves and branches pruned annually and left to decompose; rotation 10 yrs.
+  3) Understory: Coffea sp., renewed every 20 years
+The wood from canopy layer trees is used for furniture
+
+The CASFOR Case Study No.4 by Markku Kanninen, CATIE
+
+Data principally from: 
+Fassbender, H.W. 1993. Modelos edafológicos de sistemas agroforestales.
+CATIE, Serie de Materiales de Enseñanza No. 29. 471 p.
+}
+
+1	# number of Scenarios
+
+0	# mitigation scenario
+0	# baseline scenario
+
+0	# Project duration
+0	 #Year of first verification
+
+0	# Base year (or start of crediting period)
+
+0	# NetNet year, year in which base emissions or removals are measured
+
+1	# No Baseline
+0	# Exclude products
+1	# Exclude bioenergy
+0	# Mitigation method (i.e. JI, CDM etc....)
+1	# Assist 1 result
+0	# Assist 2 result
+7	# Carbon selected for comparison between baseline and mitigation scenario (i.e. biomass, soil, total etc..)
+-1	# answer0
+-1	# answer1
+-1	# answer2
+-1	# answer3
+-1	# answer4
+-1	# answer5
+-1	# answer6
+-1	# answer7
+-1	# answer8
+-1	# answer9
+-1	# answer10
+-1	# answer11
+-1	# answer12
+-1	# answer13
+-1	# answer14
+-1	# answer15
+-1	# answer16
+#Growth season (0,1) and Mean monthly temperature (C)
+0	0	#January
+0	0	#February
+0	0	#March
+0	0	#April
+0	0	#May
+0	0	#June
+0	0	#July
+0	0	#August
+0	0	#September
+0	0	#October
+0	0	#November
+0	0	#December
+scenario "Scenario 1"
+{
+	description
+	{
+Shade coffee
+}
+	stand
+	{
+		3	# number of cohorts
+
+		# global biomass parameters
+		300.0	# max_biomass in the stand [Mg/ha]
+		"a"	# growth method: "d"=growth driven by biomass density
+			#                "a"=growth driven by age
+		"m"	# competition method: "t"=competition relative to the Total biomass in the stand
+			#                     "m"=competition against multiple cohorts
+
+		"t"	# management mortality method: "t"=management mortality depends only in the total volume harvested
+			#                              "m"=management mortality depends on which cohort is harvested
+
+		# global soil parameters
+		8000	# annual mean temperature
+		2500	# precipitation dry season
+		1000	# potential evapotranspiration dry season
+
+		cohort "canopy"
+		{
+			0	# starting age for this cohort
+			biomass
+			{
+				20000.0	# max_biomass in this cohort [Mg/ha]
+
+				# stems
+				0.48	# carbon content
+				0.40	# wood density
+				0.0	# initial carbon
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	0.00
+					3	1.00
+					6	4.00
+					10	13.00
+					15	14.00
+					20	7.00
+					25	0.5
+					29	0.00
+					13	15.00
+				}
+
+				# foliage
+				0.48	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				0.5	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1.00
+					10	1.00
+					20	0.80
+					30	1.00
+				}
+
+				# branches
+				0.48	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				0.05	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1.00
+					10	0.6
+					20	0.5
+					30	1.00
+				}
+
+				# roots
+				0.48	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				0.05	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1.00
+					10	0.8
+					20	0.7
+					30	1.00
+				}
+
+				# mortality table
+				{
+					#biom/biom_max	mortality
+					0	0.01
+					25	0.01
+					100	0.01
+					200	1.00
+				}
+
+				# competition table
+				{
+					#growth reduction factors on cohorts
+					#biom/biom_max2313canopy2313intermediate2313understory
+					0.00	1.000	1.000	1.000
+					0.25	1.00	1.000	1.000
+					0.50	1.00	1.000	1.000
+					0.75	0.75	1.000	1.000
+					1.00	0.10	1.000	1.000
+				}
+
+				# thinning and harvest table
+				{
+					#		stems		branches		foliage		slash
+					#yr	%thin	logw	pulp	logw	pulp	logw	pulp	firew
+					20	1.000	0.7	0.00	0.00	0.00	0.0	0.0	0.00	0.0
+				}
+
+				# management mortality
+				{
+					#intensity	start	yrs
+				}
+			}
+
+			soil
+			{
+				0.6	# c
+				0.8	# k0_sol
+				0.38	# c_nwl_sol
+				0.36	# c_nwl_cel
+				0.03	# c_fwl_sol
+				0.65	# c_fwl_cel
+				0.03	# c_cwl_sol
+				0.75	# c_cwl_cel
+				0.5	# X0_nwl
+				0.5	# X0_fwl
+				0.5	# X0_cwl
+				0.783027	# X0_sol
+				2.987762	# X0_cel
+				2.303786	# X0_lig
+				2.0	# X0_hum1
+				7.0	# X0_hum2
+			}
+			finance
+			{
+				0.0	# stumpage of fire wood
+				0.0	# stumpage of pulp wood
+				0.0	# stumpage of round wood
+			}
+				 # age related costs
+				 #yr	fixed cost	recurring cost
+				{
+				}
+				 # age related returns
+				 #yr	fixed return	recurring return
+				{
+				}
+		}
+
+		cohort "intermediate"
+		{
+			0	# starting age for this cohort
+			biomass
+			{
+				20000.0	# max_biomass in this cohort [Mg/ha]
+
+				# stems
+				0.47	# carbon content
+				0.35	# wood density
+				0.0	# initial carbon
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	0.00
+					4	6.00
+					6	8.00
+					12	6.00
+					25	0.0
+				}
+
+				# foliage
+				0.47	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				1	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1.10
+					10	1.0
+					20	1.0
+					30	1.0
+				}
+
+				# branches
+				0.47	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				1	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1.0
+					10	1.0
+					20	1.0
+					30	1.0
+				}
+
+				# roots
+				0.47	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				0.07	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1.00
+					10	0.7
+					20	0.7
+					30	1.00
+				}
+
+				# mortality table
+				{
+					#biom/biom_max	mortality
+					0	0.020
+					50	0.020
+					100	0.020
+					150	0.020
+					200	1.000
+				}
+
+				# competition table
+				{
+					#growth reduction factors on cohorts
+					#biom/biom_max2313canopy2313intermediate2313understory
+					0.00	1.000	1.000	1.000
+					0.25	1.000	1.000	1.000
+					0.50	1.000	1.000	1.000
+					0.75	0.500	0.500	1.000
+					1.00	0.000	0.000	1.000
+				}
+
+				# thinning and harvest table
+				{
+					#		stems		branches		foliage		slash
+					#yr	%thin	logw	pulp	logw	pulp	logw	pulp	firew
+					10	1.00	0.00	0.00	0.00	0.00	0.0	0.0	0.00	0.0
+				}
+
+				# management mortality
+				{
+					#intensity	start	yrs
+				}
+			}
+
+			soil
+			{
+				0.6	# c
+				0.8	# k0_sol
+				0.38	# c_nwl_sol
+				0.36	# c_nwl_cel
+				0.03	# c_fwl_sol
+				0.65	# c_fwl_cel
+				0.03	# c_cwl_sol
+				0.75	# c_cwl_cel
+				0.1	# X0_nwl
+				0.1	# X0_fwl
+				0.1	# X0_cwl
+				0.824823	# X0_sol
+				2.559607	# X0_cel
+				1.846983	# X0_lig
+				2.0	# X0_hum1
+				7.0	# X0_hum2
+			}
+			finance
+			{
+				0.0	# stumpage of fire wood
+				0.0	# stumpage of pulp wood
+				0.0	# stumpage of round wood
+			}
+				 # age related costs
+				 #yr	fixed cost	recurring cost
+				{
+				}
+				 # age related returns
+				 #yr	fixed return	recurring return
+				{
+				}
+		}
+
+		cohort "understory"
+		{
+			0	# starting age for this cohort
+			biomass
+			{
+				2000.0	# max_biomass in this cohort [Mg/ha]
+
+				# stems
+				0.48	# carbon content
+				0.40	# wood density
+				0.0	# initial carbon
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	0.00
+					3	1.00
+					6	4.00
+					10	13.00
+					15	14.00
+					20	7.00
+					25	0.5
+					29	0.00
+					13	15.00
+				}
+
+				# foliage
+				0.5	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				0.3	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1.0
+					5	0.80
+					10	1.00
+					15	1.00
+					20	1.00
+					25	1.50
+				}
+
+				# branches
+				0.5	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				0.05	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1.00
+					5	1.00
+					10	1.00
+					15	1.00
+					20	1.00
+					25	1.00
+				}
+
+				# roots
+				0.5	# carbon content
+				0.0	# initial carbon
+				1.0	# growth correction factor
+				0.07	# turnover rate
+				# growth table
+				{
+					#biom/biom_max	CAI
+					0	1.00
+					5	0.7
+					10	0.6
+					15	0.6
+					20	1.00
+				}
+
+				# mortality table
+				{
+					#biom/biom_max	mortality
+					0	0.020
+					10	0.020
+					20	0.020
+					100	0.020
+					200	1.000
+				}
+
+				# competition table
+				{
+					#growth reduction factors on cohorts
+					#biom/biom_max2313canopy2313intermediate2313understory
+					0.00	1.000	1.000	1.000
+					0.25	1.200	1.0	1.0
+					0.50	0.900	0.75	0.75
+					0.75	0.5	0.5	0.250
+					1.00	0.000	0.000	0.000
+				}
+
+				# thinning and harvest table
+				{
+					#		stems		branches		foliage		slash
+					#yr	%thin	logw	pulp	logw	pulp	logw	pulp	firew
+					20	1.000	0.00	0.00	0.00	0.00	0.0	0.0	0.00	0.0
+				}
+
+				# management mortality
+				{
+					#intensity	start	yrs
+				}
+			}
+
+			soil
+			{
+				0.6	# c
+				0.8	# k0_sol
+				0.38	# c_nwl_sol
+				0.36	# c_nwl_cel
+				0.03	# c_fwl_sol
+				0.65	# c_fwl_cel
+				0.03	# c_cwl_sol
+				0.75	# c_cwl_cel
+				0.3	# X0_nwl
+				0.1	# X0_fwl
+				0.5	# X0_cwl
+				0.542570	# X0_sol
+				1.840026	# X0_cel
+				1.369046	# X0_lig
+				2.0	# X0_hum1
+				7.0	# X0_hum2
+			}
+			finance
+			{
+				0.0	# stumpage of fire wood
+				0.0	# stumpage of pulp wood
+				0.0	# stumpage of round wood
+			}
+				 # age related costs
+				 #yr	fixed cost	recurring cost
+				{
+				}
+				 # age related returns
+				 #yr	fixed return	recurring return
+				{
+				}
+		}
+
+	}
+
+	products
+	{
+		# raw material allocation
+		.4	0.00	0.00	# logwood to production line: sawnwood, boards, paper, rest=energy wood
+			0.00	0.00	# pulpwood to production line: boards, paper, rest=energy wood
+
+		# process losses
+		0.10	0.12	0.35	0.2	# from sawnwood to: boards, paper, firewood, mill site dump
+			0.05	0.20	0.2	# from boards to: paper, firewood, mill site dump
+				0.20	0.2	# from paper to: firewood, mill site dump
+					0.05	# from firewood to: mill site dump
+
+		# products allocation
+		0.80	0.19	# sawnwood to: long term, medium term, rest=short term
+		0.10	0.30	# boards to: long term, medium term, rest=short term
+		0.00	0.04	# paper to: long term, medium term, rest=short term
+
+		# products end of life
+		0.02	0.3	# long term to: recycling, energy, rest=landfill
+		0.04	.3	# med term to: recycling, energy, rest=landfill
+		0.15	.4	# short term to: recycling, energy, rest=landfill
+
+		# recycling table
+		0.00	0.2	# long to: long, med, rest=short
+			.1	# med to: med, rest=short
+				# all=short to short
+
+		# life span
+		14	7	1	7	35	# long, med, short, mill site dump, landfill
+	}
+
+	bioenergy
+	{
+		# GWP of gases
+		1	23	270	2	12	# GWP of gases: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for current technology using slashwood fuelwood
+		"Coal"	"Cookstove"	# Name of current fuel and technology using slashwood fuelwood
+		24	15	# Technology efficiency and heating value
+		2550	0.02	0	66.2	0.02	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for alternative technology using slashwood fuelwood
+		"Improved Cookstove"	# Name of alternative technology using slashwood fuelwood
+		25	15	# Technology efficiency and heating value
+		1550	7.92	0	69.5	6.84	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for current technology using industrial residues fuelwood
+		"Coal"	"Cookstove"	# Name of current fuel and technology using industrial fuelwood
+		24	15	# Technology efficiency and heating value
+		2550	0.02	0	66.2	0.02	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+		# Parameters for alternative technology using industrial residues fuelwood
+		"Improved Cookstove"	# Name of alternative technology using industrial fuelwood
+		25	15	# Technology efficiency and heating value
+		1550	7.92	0	69.5	6.84	# Emission Factor: CO2,CH4,N2O,CO,TNMOC
+
+	}
+
+	# user defined cost table
+	{
+		#yr	fixed costs	recurring costs	fixed returns	recurring returns	interest rate
+	}
+
+}
+
